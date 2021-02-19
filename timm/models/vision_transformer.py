@@ -334,6 +334,8 @@ class VisionTransformer(nn.Module):
         trunc_normal_(self.cls_token, std=.02)
         self.apply(self._init_weights)
 
+        print("We are here")
+
     def _init_weights(self, m):
         if isinstance(m, nn.Linear):
             trunc_normal_(m.weight, std=.02)
@@ -363,7 +365,7 @@ class VisionTransformer(nn.Module):
         x = x + self.pos_embed
         x = self.pos_drop(x)
 
-        print("Shape of idden states before encoder layers:")
+        print("Shape of hidden states before encoder layers:")
         print(x.shape)
 
         for idx, blk in enumerate(self.blocks-):
