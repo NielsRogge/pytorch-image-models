@@ -363,8 +363,17 @@ class VisionTransformer(nn.Module):
         x = x + self.pos_embed
         x = self.pos_drop(x)
 
-        for blk in self.blocks:
+        print("Shape of idden states before encoder layers:")
+        print(x.shape)
+
+        for idx, blk in enumerate(self.blocks-):
+            print(f"Hidden states before layer {idx}")
+            print(x[0,:3,:3])
+
             x = blk(x)
+
+            print(f"Hidden states after layer {idx}")
+            print(x[0,:3,:3])
 
         x = self.norm(x)[:, 0]
         x = self.pre_logits(x)
