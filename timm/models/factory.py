@@ -28,6 +28,8 @@ def create_model(
     """
     model_args = dict(pretrained=pretrained)
 
+    print("Hello, loading model")
+
     # Only EfficientNet and MobileNetV3 models have support for batchnorm params or drop_connect_rate passed as args
     is_efficientnet = is_model_in_modules(model_name, ['efficientnet', 'mobilenetv3'])
     if not is_efficientnet:
