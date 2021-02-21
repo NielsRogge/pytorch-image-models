@@ -196,8 +196,6 @@ class Block(nn.Module):
 
     def forward(self, x):
         
-        print("This is a test")
-        
         x = x + self.drop_path(self.attn(self.norm1(x)))
         x = x + self.drop_path(self.mlp(self.norm2(x)))
         return x
@@ -214,8 +212,6 @@ class PatchEmbed(nn.Module):
         self.img_size = img_size
         self.patch_size = patch_size
         self.num_patches = num_patches
-
-        print("C'mon let's go")
         
         self.proj = nn.Conv2d(in_chans, embed_dim, kernel_size=patch_size, stride=patch_size)
 
@@ -371,7 +367,7 @@ class VisionTransformer(nn.Module):
         print("Shape of hidden states before encoder layers:")
         print(x.shape)
 
-        for idx, blk in enumerate(self.blocks-):
+        for idx, blk in enumerate(self.blocks):
             print(f"Hidden states before layer {idx}")
             print(x[0,:3,:3])
 
@@ -409,8 +405,6 @@ class DistilledVisionTransformer(VisionTransformer):
         trunc_normal_(self.pos_embed, std=.02)
         self.head_dist.apply(self._init_weights)
 
-        print("Hello we're in the Distilled version")
-
     def forward_features(self, x):
         B = x.shape[0]
         x = self.patch_embed(x)
@@ -426,8 +420,6 @@ class DistilledVisionTransformer(VisionTransformer):
             x = blk(x)
 
         x = self.norm(x)
-
-        print("Another test")
 
         return x[:, 0], x[:, 1]
 
