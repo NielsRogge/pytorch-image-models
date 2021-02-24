@@ -194,8 +194,8 @@ class Attention(nn.Module):
 
         x = (attn @ v).transpose(1, 2).reshape(B, N, C)
 
-        print("Hidden states after self-attention:")
-        print(attn[0,:3,:3])
+        print("Hidden states before projection:")
+        print(x[0,:3,:3])
 
         x = self.proj(x)
         x = self.proj_drop(x)
