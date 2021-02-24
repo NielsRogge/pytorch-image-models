@@ -187,12 +187,13 @@ class Attention(nn.Module):
 
         attn = attn.softmax(dim=-1)
 
-        print("Hidden states after self-attention:")
-        print(attn[0,:3,:3])
-
         attn = self.attn_drop(attn)
 
         x = (attn @ v).transpose(1, 2).reshape(B, N, C)
+
+        print("Hidden states after self-attention:")
+        print(attn[0,:3,:3])
+
         x = self.proj(x)
         x = self.proj_drop(x)
         return x
