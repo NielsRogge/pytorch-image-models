@@ -201,8 +201,9 @@ class Attention(nn.Module):
         x = self.proj(x)
         x = self.proj_drop(x)
 
-        print("Hidden states after dense + dropout:")
-        print(x[0,:3,:3])
+        # OK
+        # print("Hidden states after dense + dropout:")
+        # print(x[0,:3,:3])
 
         return x
 
@@ -232,6 +233,11 @@ class Block(nn.Module):
         # print(z[0,:3,:3])
 
         x = x + self.drop_path(self.attn(self.norm1(x)))
+
+        print("Hidden states after second layernorm:")
+        k = self.norm2(x)
+        print(k[0,:3,:3])
+
         x = x + self.drop_path(self.mlp(self.norm2(x)))
         return x
 
