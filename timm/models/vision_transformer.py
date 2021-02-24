@@ -189,6 +189,9 @@ class Attention(nn.Module):
 
         attn = self.attn_drop(attn)
 
+        print("Attention after dropout:")
+        print(attn[0,:3,:3])
+
         x = (attn @ v).transpose(1, 2).reshape(B, N, C)
 
         print("Hidden states after self-attention:")
