@@ -144,7 +144,15 @@ class Mlp(nn.Module):
         self.drop = nn.Dropout(drop)
 
     def forward(self, x):
+        
+        print("Hidden states before MLP:")
+        print(x[0,:3,:3])
+        
         x = self.fc1(x)
+
+        print("Hidden states after fc1:")
+        print(x[0,:3,:3])
+
         x = self.act(x)
         x = self.drop(x)
         x = self.fc2(x)
@@ -234,12 +242,16 @@ class Block(nn.Module):
 
         x = x + self.drop_path(self.attn(self.norm1(x)))
 
-        print("Hidden states before second layernorm:")
-        print(x[0,:3,:3])
+        # OK
+        # print("Hidden states before second layernorm:")
+        # print(x[0,:3,:3])
 
         k = self.norm2(x)
         print("Hidden states after second layernorm:")
         print(k[0,:3,:3])
+
+        l = 
+        print("Hidden states")
 
         x = x + self.drop_path(self.mlp(self.norm2(x)))
         return x
