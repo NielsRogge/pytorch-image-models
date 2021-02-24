@@ -171,6 +171,10 @@ class Attention(nn.Module):
         q, k, v = qkv[0], qkv[1], qkv[2]   # make torchscript happy (cannot use tensor as tuple)
 
         attn = (q @ k.transpose(-2, -1)) * self.scale
+
+        print("Attention scores before softmax:")
+        print(attn[0,:3,:3])
+
         attn = attn.softmax(dim=-1)
         attn = self.attn_drop(attn)
 
