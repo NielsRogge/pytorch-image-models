@@ -250,9 +250,6 @@ class Block(nn.Module):
         print("Hidden states after second layernorm:")
         print(k[0,:3,:3])
 
-        l = 
-        print("Hidden states")
-
         x = x + self.drop_path(self.mlp(self.norm2(x)))
         return x
 
