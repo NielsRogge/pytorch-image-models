@@ -161,6 +161,10 @@ class Mlp(nn.Module):
         x = self.drop(x)
         x = self.fc2(x)
         x = self.drop(x)
+
+        print("Hidden states after fc2 + drop:")
+        print(x[0,:3,:3])
+
         return x
 
 
