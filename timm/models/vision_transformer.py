@@ -214,6 +214,10 @@ class Block(nn.Module):
         print("Hidden states after self-attention:")
         print(y[0,:3,:3])
 
+        z = self.drop_path(self.attn(self.norm1(x)))
+        print("Hidden states after first dropout:")
+        print(z[0,:3,:3])
+
         x = x + self.drop_path(self.attn(self.norm1(x)))
         x = x + self.drop_path(self.mlp(self.norm2(x)))
         return x
