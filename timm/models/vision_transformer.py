@@ -188,7 +188,7 @@ class Attention(nn.Module):
         attn = attn.softmax(dim=-1)
 
         print("Hidden states after self-attention:")
-        print(context_layer[0,:3,:3])
+        print(attn[0,:3,:3])
 
         attn = self.attn_drop(attn)
 
