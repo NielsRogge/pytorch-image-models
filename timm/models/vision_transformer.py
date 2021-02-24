@@ -182,7 +182,14 @@ class Attention(nn.Module):
         
         attn = (q @ k.transpose(-2, -1)) * self.scale
 
+        print("Attention scores before softmax:")
+        print(attn[0,:3,:3])
+
         attn = attn.softmax(dim=-1)
+
+        print("Hidden states after self-attention:")
+        print(context_layer[0,:3,:3])
+
         attn = self.attn_drop(attn)
 
         x = (attn @ v).transpose(1, 2).reshape(B, N, C)
@@ -208,12 +215,12 @@ class Block(nn.Module):
     def forward(self, x):
         
         y = self.attn(self.norm1(x))
-        print("Hidden states after self-attention:")
-        print(y[0,:3,:3])
+        # print("Hidden states after self-attention:")
+        # print(y[0,:3,:3])
 
         z = self.drop_path(self.attn(self.norm1(x)))
-        print("Hidden states after first dropout:")
-        print(z[0,:3,:3])
+        # print("Hidden states after first dropout:")
+        # print(z[0,:3,:3])
 
         x = x + self.drop_path(self.attn(self.norm1(x)))
         x = x + self.drop_path(self.mlp(self.norm2(x)))
