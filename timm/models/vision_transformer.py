@@ -170,20 +170,17 @@ class Attention(nn.Module):
         qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
         q, k, v = qkv[0], qkv[1], qkv[2]   # make torchscript happy (cannot use tensor as tuple)
 
-        print("Hidden states before self-attention:")
-        print(x[0,:3,:3])
+        # print("Hidden states before self-attention:")
+        # print(x[0,:3,:3])
         
-        print("Queries:")
-        print(q[0,0,:3,:3])
+        # print("Queries:")
+        # print(q[0,0,:3,:3])
 
-        print("Keys:")
-        print(k.shape)
-        print(k[0,0,:3,:3])
+        # print("Keys:")
+        # print(k.shape)
+        # print(k[0,0,:3,:3])
         
         attn = (q @ k.transpose(-2, -1)) * self.scale
-
-        print("Attention scores before softmax:")
-        print(attn[0,:3,:3])
 
         attn = attn.softmax(dim=-1)
         attn = self.attn_drop(attn)
@@ -211,8 +208,6 @@ class Block(nn.Module):
     def forward(self, x):
         
         y = self.attn(self.norm1(x))
-        print("Hidden states after self-attention:")
-        print(y[0,:3,:3])
 
         z = self.drop_path(self.attn(self.norm1(x)))
         print("Hidden states after first dropout:")
