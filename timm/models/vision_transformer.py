@@ -171,10 +171,12 @@ class Attention(nn.Module):
         q, k, v = qkv[0], qkv[1], qkv[2]   # make torchscript happy (cannot use tensor as tuple)
 
         print("Queries:")
-        print(queries.shape)
+        print(q.shape)
+
+        print(q[0,0,:3,:3])
 
         print("Keys:")
-        print(keys.shape)
+        print(k.shape)
         
         attn = (q @ k.transpose(-2, -1)) * self.scale
 
