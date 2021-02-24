@@ -170,13 +170,15 @@ class Attention(nn.Module):
         qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
         q, k, v = qkv[0], qkv[1], qkv[2]   # make torchscript happy (cannot use tensor as tuple)
 
+        print("Hidden states before self-attention:")
+        print(x[0,:3,:3])
+        
         print("Queries:")
-        print(q.shape)
-
         print(q[0,0,:3,:3])
 
         print("Keys:")
         print(k.shape)
+        print(k[0,0,:3,:3])
         
         attn = (q @ k.transpose(-2, -1)) * self.scale
 
