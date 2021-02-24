@@ -154,6 +154,10 @@ class Mlp(nn.Module):
         print(x[0,:3,:3])
 
         x = self.act(x)
+
+        print("Hidden states after fc1 + act:")
+        print(x[0,:3,:3])
+
         x = self.drop(x)
         x = self.fc2(x)
         x = self.drop(x)
@@ -246,6 +250,7 @@ class Block(nn.Module):
         # print("Hidden states before second layernorm:")
         # print(x[0,:3,:3])
 
+        # OK
         k = self.norm2(x)
         print("Hidden states after second layernorm:")
         print(k[0,:3,:3])
