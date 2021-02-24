@@ -208,6 +208,8 @@ class Block(nn.Module):
     def forward(self, x):
         
         y = self.attn(self.norm1(x))
+        print("Hidden states after self-attention:")
+        print(y[0,:3,:3])
 
         z = self.drop_path(self.attn(self.norm1(x)))
         print("Hidden states after first dropout:")
